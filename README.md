@@ -1,6 +1,6 @@
 # Cloudflare Dynamic DNS Update
 
-[![N|Solid](https://img.icons8.com/color/2x/cloudflare.png)](https://github.com/MrWhizzy/cloudflare-ddns-update)
+[![N|Solid](https://img.icons8.com/color/2x/cloudflare.png)](https://github.com/OnlyHardOfficial/cloudflare-ddns-update)
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
