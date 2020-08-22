@@ -2,8 +2,8 @@
 Cloudflare API v4 Dynamic DNS Update in Bash --> Working 20/08/2020
 
 
-Execute on /bin/  -->Porque a bin executa de forma by system que por sua vez-->
-Vai buscar as credenciais a pasta: /etc/cfconf --> Esta directoria é segura onde se podem colocar algo como credenciais
+file "cfupdate" ->Executado na pasta /bin/  -->Porque a bin executa de forma by system que por sua vez-->
+Vai buscar as credenciais a pasta: /etc/cfconfig --> Esta directoria é segura onde se podem colocar algo como credenciais
 
 
 
