@@ -1,0 +1,7 @@
+#!/bin/bash
+echo "Loading SECRET CREDENTIALS"			#Symple text on loading "cfupdate" script
+auth_email="xxxxxxxxxxxxx"					#E-mail used on CloudFlare
+auth_key="xxxxxxxxxxxxx"					#Global API key can be used, Top right corner, "My profile">"Global API Key"
+zone_identifier="xxxxxxxxxxxxx"				#Can be found in the "Overview" tab of your domain>API>Zone ID
+not_proxied="subdomain.mydomain.com"		#Insert here only DNS with non-proxye flag
+records=($not_proxied)                              #
