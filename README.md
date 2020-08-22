@@ -1,6 +1,17 @@
 # cloudflare-ddns-update.sh
 Cloudflare API v4 Dynamic DNS Update in Bash --> Working 20/08/2020
 
+
+Execute on /bin/  -->Porque a bin executa de forma by system que por sua vez-->
+Vai buscar as credenciais a pasta: /etc/cfconf --> Esta directoria é segura onde se podem colocar algo como credenciais
+
+
+
+
+
+
+
+
 # Based on benkulbertis/cloudflare-update-record.sh
 auth_email="your-email@example.com"                # The email used to login 'https://dash.cloudflare.com'
 auth_key="0000000000000000000000000000000000000"   # Top right corner, "My profile" > "Global API Key"
