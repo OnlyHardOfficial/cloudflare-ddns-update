@@ -1,4 +1,3 @@
-
 #!/bin/bash
 source /etc/cfconfig
 
@@ -11,43 +10,42 @@ source /etc/cfconfig
     echo "[Cloudflare DDNS] Check Initiated for <$record_name>"
 
     # Seek for the record
-    record=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/$zone_identif>
+    record=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/$zone_identifier/dns_records?name=$record_name" -H "X-Auth-Email: $auth_email" -H "X-Auth-Key: $auth_key" -H "Content-Type: application/json")
 
-    # Can't do anything without the record
+     # Can't do anything without the record
     if [[ $record == *"\"count\": 0"* ]] || [[ $record == *"\"count\":0"* ]]; then
-      >&2 echo -e "[Cloudflare DDNS] Record <$record_name> does not exist, perhaps cr>
+      >&2 echo -e "[Cloudflare DDNS] Record <$record_name> does not exist, perhaps create one first?"
       continue
     fi
 
     # Set existing IP address from the fetched record
     old_ip=$(echo "$record" | grep -Po '(?<="content":")[^"]*' | head -1 | xargs)
 
-    # Compare if they're the same
+   # Compare if they're the same
     if [ $ip == $old_ip ]; then
       echo "[Cloudflare DDNS] IP has not changed for record <$record_name>."
       continue
     fi
 
     # Set the record identifier from result
-    record_identifier=$(echo "$record" | grep -Po '(?<="id":")[^"]*' | head -1 | xarg>
+    record_identifier=$(echo "$record" | grep -Po '(?<="id":")[^"]*' | head -1 | xargs)
 
     proxied=true
     if [[ $record_name == $not_proxied ]]; then
       proxied=false
     fi
     # The execution of update
-    update=$(curl -s -X PUT "https://api.cloudflare.com/client/v4/zones/$zone_identif>
+    update=$(curl -s -X PUT "https://api.cloudflare.com/client/v4/zones/$zone_identifier/dns_records/$record_identifier" -H "X-Auth-Email: $auth_email" -H "X-Auth-Key: $auth_key" -H "Content-Type: application/json" --data "{\"id\":\"$zone_identifier\",\"type\":\"A\",\"proxied\":$proxied,\"name\":\"$record_name\",\"content\":\"$ip\"}")
 
     # The moment of truth
     case "$update" in
     *"\"success\":false"*)
-      >&2 echo -e "[Cloudflare DDNS] Update <$record_name> failed for $record_identif>
+      >&2 echo -e "[Cloudflare DDNS] Update <$record_name> failed for $record_identifier. DUMPING RESULTS:\n$update"
       continue;;
     *"\"success\": false"*)
-      >&2 echo -e "[Cloudflare DDNS] Update <$record_name> failed for $record_identif>
+      >&2 echo -e "[Cloudflare DDNS] Update <$record_name> failed for $record_identifier. DUMPING RESULTS:\n$update"
       continue;;
     *)
-      echo "[Cloudflare DDNS] IPv4 context '$ip' has been synced to Cloudflare for <$>
+      echo "[Cloudflare DDNS] IPv4 context '$ip' has been synced to Cloudflare for <$record_name>.";;
     esac
   done
-
