@@ -1,4 +1,5 @@
 # Cloudflare Dynamic DNS Update
+CREDITS to my friend Sylver :) 
 
 [![N|Solid](https://img.icons8.com/color/2x/cloudflare.png)](https://github.com/OnlyHardOfficial/cloudflare-ddns-update)
 
